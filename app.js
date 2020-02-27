@@ -117,9 +117,26 @@ app.get('/waffles/custom', (request, response) => {
 });
 
 app.get('/greet', (request, response) => {
+  let name = request.query.name;
   let content =
-   <h1>Greetings Lilies!</h1>
-   ;
+   `<h1>Hi ${capitalize(name)}!</h1>
+   <p>
+     <a href='/'>Back to the homepage</a>
+   </p>
+   <p>
+     Change the value of the <code>name</code> parameter in the URL and see what happens!
+   </p>
+   <form method="GET" action="/greet">
+     <div class="form-section">
+       <label for="name">Name:</label>
+       <input type="text" name="name" id="name" required>
+     </div>
+     <div class="form-section">
+       <input type="submit" value="Submit!">
+     </div>
+   </form>
+   <h2>Greetings ${capitalize(name)}!</h2>
+   `;
   response.send(getLayoutHTML(content));
 });
 // Visit, e.g., /bake?baked_good=waffles&count=20
